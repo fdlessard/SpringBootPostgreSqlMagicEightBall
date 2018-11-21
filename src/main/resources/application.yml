@@ -1,10 +1,19 @@
 # Default properties
+
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: development
+
 logging:
   level:
     ROOT: DEBUG
 
 ---
 # Development profile
+
 spring:
   profiles: development
   datasource:
@@ -22,7 +31,8 @@ spring:
       eclipselink.weaving: false
 
 ---
-## Integration test profile
+# Integration test profile
+
 spring:
   profiles: integration
   datasource:

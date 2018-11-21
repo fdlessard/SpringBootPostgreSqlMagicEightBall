@@ -1,0 +1,61 @@
+databaseChangeLog:
+
+#- changeSet:
+#    id: add_sequence
+#    author: fdlessard
+#    changes:
+#    - createSequence:
+#          schemaName: my_schema
+#          sequenceName: seq_id
+
+- changeSet:
+    id: create_magic_eight_ball_answer_table
+    author: fdlessard
+    changes:
+    - createTable:
+        schemaName: my_schema
+        tableName: MAGIC_EIGHT_BALL_ANSWER
+        columns:
+        - column:
+            name: id
+            type: bigint
+            autoIncrement: true
+#            defaultValueComputed: "nextval('my_schema.seq_id')"
+            constraints:
+                primaryKey: true
+                nullable: false
+        - column:
+            name: version
+            type: int
+            defaultValueNumeric: 0
+            constraints:
+                nullable: false
+        - column:
+            name: message
+            type: varchar(255)
+            constraints:
+                nullable: false
+        - column:
+            name: color
+            type: varchar(25)
+            constraints:
+                nullable: false
+
+- changeSet:
+    id: load_magic_eight_ball_answer_data
+    author: fdlessard
+    changes:
+    - loadData:
+        schemaName: my_schema
+        tableName: MAGIC_EIGHT_BALL_ANSWER
+        columns:
+        - column:
+            name: message
+            type: string
+        - column:
+            name: color
+            type: string
+        encoding: UTF-8
+        file: "db/data/MagicEightBallAnswers.csv"
+        quotchar: "'"
+        separator: ','

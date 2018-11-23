@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity()
-@Table( schema = "my_schema", name = "MAGIC_EIGHT_BALL_ANSWER")
+@Table(schema = "my_schema", name = "MAGIC_EIGHT_BALL_ANSWER")
 public class MagicEightBallAnswer implements Serializable {
 
     @Id
@@ -24,7 +24,7 @@ public class MagicEightBallAnswer implements Serializable {
             sequenceName = "SEQ_ID",
             allocationSize = 1
     )
-    private long id;
+    private Long id;
 
     @JsonIgnore
     @Version

@@ -1,15 +1,23 @@
 # Default properties
 
+spring:
+  profiles:
+    active: cloud
+
 server:
   port: 8080
 
-spring:
-  profiles:
-    active: development
-
-logging:
-  level:
-    ROOT: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans, health, loggers
+    health:
+      enabled: true
+    loggers:
+      enabled: true
+    beans:
+      enabled: true
 
 ---
 # Development profile
@@ -17,7 +25,7 @@ logging:
 spring:
   profiles: development
   datasource:
-    url: jdbc:postgresql://localhost:32768/postgres?searchpath=my_schema
+    url: jdbc:postgresql://localhost:32768/postgres?currentSchema=my_schema
     username: postgres
     password:
     initialization-mode: always
@@ -37,7 +45,7 @@ spring:
   profiles: integration
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:m8b
+    url: jdbc:h2:mem:m8b;MODE=PostgreSQL
   jpa:
     generate-ddl: false
     properties:
@@ -49,3 +57,19 @@ spring:
   h2:
     console:
       enabled: true
+
+---
+# Cloud profile
+
+spring:
+  profiles: cloud
+  datasource:
+    initialization-mode: always
+  jpa:
+    generate-ddl: false
+    properties:
+      eclipselink.target-database: org.eclipse.persistence.platform.database.PostgreSQLPlatform
+      eclipselink.jdbc.allow-native-sql-query: true
+      eclipselink.logging.parameters: true
+      eclipselink.logging.level: FINEST
+      eclipselink.weaving: false

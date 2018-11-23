@@ -38,7 +38,7 @@ class MagicEightBallControllerTest {
     @Test
     void shake() {
 
-        MagicEightBallAnswer magicEightBallAnswer = new MagicEightBallAnswer(0, 0,"message", "color");
+        MagicEightBallAnswer magicEightBallAnswer = new MagicEightBallAnswer(Long.valueOf(0), 0,"message", "color");
         Mockito.when(magicEightBallService.shake()).thenReturn(magicEightBallAnswer);
         assertEquals(magicEightBallAnswer, magicEightBallController.shake());
     }
@@ -47,15 +47,15 @@ class MagicEightBallControllerTest {
     void getAll() {
 
         List<MagicEightBallAnswer> magicEightBallAnswers = Arrays.asList(
-                new MagicEightBallAnswer(1, 0,"message1", "color1"),
-                new MagicEightBallAnswer(2, 0,"message2", "color2")
+                new MagicEightBallAnswer(Long.valueOf(1), 0,"message1", "color1"),
+                new MagicEightBallAnswer(Long.valueOf(2), 0,"message2", "color2")
         );
 
         Mockito.when(magicEightBallService.getAll()).thenReturn(magicEightBallAnswers);
 
         List<MagicEightBallAnswer> mebas = magicEightBallController.getAll();
         assertEquals(2, mebas.size());
-        assertEquals(new MagicEightBallAnswer(1, 0,"message1", "color1"), mebas.get(0));
-        assertEquals(new MagicEightBallAnswer(2, 0, "message2", "color2"), mebas.get(1));
+        assertEquals(new MagicEightBallAnswer(Long.valueOf(1), 0,"message1", "color1"), mebas.get(0));
+        assertEquals(new MagicEightBallAnswer(Long.valueOf(2), 0, "message2", "color2"), mebas.get(1));
     }
 }

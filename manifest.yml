@@ -5,5 +5,11 @@ applications:
   memory : 1024M
   path: target/magiceightball-0.0.1-SNAPSHOT.jar
   instances: 1
-services:
-  - application-logs
+#  health-check-type: http
+#  health-check-http-endpoint: /actuator/health
+  services:
+    - application-logs
+    - magiceightball-db
+  env:
+    # turn on the "cloud" profile
+    SPRING_PROFILES_ACTIVE: cloud

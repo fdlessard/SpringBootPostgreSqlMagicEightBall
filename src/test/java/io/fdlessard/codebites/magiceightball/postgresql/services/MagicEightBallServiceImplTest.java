@@ -30,8 +30,8 @@ class MagicEightBallServiceImplTest {
     void beforeEach() {
         magicEightBallService = new MagicEightBallServiceImpl(magicEightBallRepository);
         List<MagicEightBallAnswer> magicEightBallAnswers = Arrays.asList(
-                new MagicEightBallAnswer(1, 0,"message1", "color1"),
-                new MagicEightBallAnswer(2, 0,"message2", "color2")
+                new MagicEightBallAnswer(Long.valueOf(1), 0,"message1", "color1"),
+                new MagicEightBallAnswer(Long.valueOf(2), 0,"message2", "color2")
         );
 
         Mockito.when(magicEightBallRepository.findAll()).thenReturn(magicEightBallAnswers);

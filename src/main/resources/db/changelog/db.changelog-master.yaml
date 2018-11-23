@@ -1,13 +1,12 @@
 databaseChangeLog:
 
 #- changeSet:
-#    id: add_sequence
+#    id: create_magic_eight_ball_answer_sequence
 #    author: fdlessard
 #    changes:
 #    - createSequence:
-#          schemaName: my_schema
-#          sequenceName: seq_id
-
+#        schemaName: my_schema
+#        sequenceName: seq_id
 - changeSet:
     id: create_magic_eight_ball_answer_table
     author: fdlessard
@@ -20,7 +19,6 @@ databaseChangeLog:
             name: id
             type: bigint
             autoIncrement: true
-#            defaultValueComputed: "nextval('my_schema.seq_id')"
             constraints:
                 primaryKey: true
                 nullable: false

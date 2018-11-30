@@ -19,13 +19,31 @@ management:
     beans:
       enabled: true
 
+
+# Message Queue specific configs for app1
+# app1.exchange.name=app1-exchange
+#  app1.queue.name=app1-queue
+#  app1.routing.key=app1-routing-key
+
+
+#AMQP RabbitMQ configuration
+# spring.rabbitmq.host:127.0.0.1
+# spring.rabbitmq.port:32770
+#  spring.rabbitmq.username=guest
+#  spring.rabbitmq.password=guest
+  # Additional RabbitMQ properties
+#  spring.rabbitmq.listener.simple.concurrency=4
+#  spring.rabbitmq.listener.simple.max-concurrency=8
+#  spring.rabbitmq.listener.simple.retry.initial-interval=5000
+
+
 ---
 # Development profile
 
 spring:
   profiles: development
   datasource:
-    url: jdbc:postgresql://localhost:32768/postgres?currentSchema=my_schema
+    url: jdbc:postgresql://localhost:15432/postgres?currentSchema=my_schema
     username: postgres
     password:
     initialization-mode: always
@@ -37,6 +55,11 @@ spring:
       eclipselink.logging.parameters: true
       eclipselink.logging.level: FINEST
       eclipselink.weaving: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 ---
 # Integration test profile
@@ -44,19 +67,24 @@ spring:
 spring:
   profiles: integration
   datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:m8b;MODE=PostgreSQL
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=my_schema
+    username: postgres
+    password:
+    initialization-mode: always
   jpa:
     generate-ddl: false
     properties:
-      eclipselink.target-database: org.eclipse.persistence.platform.database.H2Platform
+      eclipselink.target-database: org.eclipse.persistence.platform.database.PostgreSQLPlatform
       eclipselink.jdbc.allow-native-sql-query: true
       eclipselink.logging.parameters: true
       eclipselink.logging.level: FINEST
       eclipselink.weaving: false
-  h2:
-    console:
-      enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 
 ---
 # Cloud profile

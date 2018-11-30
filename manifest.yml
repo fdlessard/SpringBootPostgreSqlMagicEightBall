@@ -10,6 +10,7 @@ applications:
   services:
     - application-logs
     - magiceightball-db
+    - magiceightball-rabbitmq
   env:
     # turn on the "cloud" profile
     SPRING_PROFILES_ACTIVE: cloud

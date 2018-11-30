@@ -19,3 +19,7 @@ http://localhost:8080/actuator/loggers/io.fdlessard
     "configuredLevel": "DEBUG"
 }
 https://www.jetbrains.com/help/idea/running-a-dbms-image.html
+https://thepracticaldeveloper.com/2016/10/23/produce-and-consume-json-messages-with-spring-boot-amqp/
+
+https://dzone.com/articles/rabbitmq-and-spring-boot-integration-with-fault-to
+http://engineering.pivotal.io/post/spring-boot-injecting-credentials/

@@ -1,5 +1,6 @@
 package io.fdlessard.codebites.magiceightball.postgresql.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.fdlessard.codebites.magiceightball.postgresql.domain.MagicEightBallAnswer;
 import io.fdlessard.codebites.magiceightball.postgresql.repositories.MagicEightBallRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,11 @@ public class MagicEightBallServiceImpl implements MagicEightBallService {
 
     private MagicEightBallRepository magicEightBallRepository;
 
-    public MagicEightBallServiceImpl(MagicEightBallRepository magicEightBallRepository) {
+    private MessageSender messageSender;
+
+    public MagicEightBallServiceImpl(MagicEightBallRepository magicEightBallRepository, MessageSender messageSender) {
         this.magicEightBallRepository = magicEightBallRepository;
+        this.messageSender = messageSender;
     }
 
     public MagicEightBallAnswer shake() {
@@ -37,6 +41,11 @@ public class MagicEightBallServiceImpl implements MagicEightBallService {
         log.debug("MagicEightBallServiceImpl.getAll()");
 
         return toList(magicEightBallRepository.findAll());
+    }
+
+    public void save(MagicEightBallAnswer magicEightBallAnswers) {
+        log.debug("MagicEighBallServiceImpl.create()");
+        messageSender.sendMessage(magicEightBallAnswers);
     }
 
     public static <T> List<T> toList(final Iterable<T> iterable) {

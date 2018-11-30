@@ -3,10 +3,7 @@ package io.fdlessard.codebites.magiceightball.postgresql.controllers;
 import io.fdlessard.codebites.magiceightball.postgresql.domain.MagicEightBallAnswer;
 import io.fdlessard.codebites.magiceightball.postgresql.services.MagicEightBallService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,5 +38,11 @@ public class MagicEightBallController {
     public List<MagicEightBallAnswer> getAll() {
         log.debug("MagicEightBallController.getAll()");
         return magicEightBallService.getAll();
+    }
+
+    @PostMapping(value = "/", produces = "application/json")
+    public void create(@RequestBody MagicEightBallAnswer magicEightBallAnswer) {
+        log.debug("MagicEightBallController.create({})", magicEightBallAnswer);
+        magicEightBallService.save(magicEightBallAnswer);
     }
 }

@@ -21,7 +21,7 @@ public class MagicEightBallAnswer implements Serializable {
     @SequenceGenerator(
             name = "Seq",
             schema = "my_schema",
-            sequenceName = "SEQ_ID",
+            sequenceName = "seq_id",
             allocationSize = 1
     )
     private Long id;

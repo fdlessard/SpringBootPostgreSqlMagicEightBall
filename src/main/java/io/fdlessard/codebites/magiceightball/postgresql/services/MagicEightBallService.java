@@ -9,4 +9,5 @@ public interface MagicEightBallService {
 
     MagicEightBallAnswer shake();
     List<MagicEightBallAnswer> getAll();
+    void save(MagicEightBallAnswer magicEightBallAnswer);
 }

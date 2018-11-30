@@ -22,10 +22,6 @@ class MagicEightBallServiceImplIt {
     @Autowired
     private MagicEightBallService magicEightBallService;
 
-    @BeforeEach
-    void beforeEach() {
-    }
-
     @Test
     void shake() {
 
@@ -40,6 +36,16 @@ class MagicEightBallServiceImplIt {
     void getAll() {
         List<MagicEightBallAnswer> magicEightBallAnswers = magicEightBallService.getAll();
         assertNotNull(magicEightBallAnswers);
-        assertEquals(20, magicEightBallAnswers.size());
+    }
+
+    @Test
+    public void save() {
+
+        List<MagicEightBallAnswer> magicEightBallAnswers = magicEightBallService.getAll();
+        assertNotNull(magicEightBallAnswers);
+        int initialSize = magicEightBallAnswers.size();
+        magicEightBallService.save(new MagicEightBallAnswer(null, 0, "message1", "color1"));
+        magicEightBallAnswers = magicEightBallService.getAll();
+        assertNotNull(magicEightBallAnswers);
     }
 }

@@ -75,6 +75,10 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -210,20 +214,73 @@
                     </authConfig>
                     <useColor>true</useColor>
                     <verbose>true</verbose>
+                    <logDate>default</logDate>
+                    <autoPull>true</autoPull>
+                 <!--   <dockerHost>https://localhost:2376</dockerHost>-->
+<!--
+                    <certPath>${user.home}/.docker/machine/certs/</certPath>
+-->
                     <images>
+                        <!--                        <image>
+                                                    <name>fdlessard/magic-eight-ball-image:latest</name>
+                                                    <build>
+                                                        <dockerFile>${project.basedir}/Dockerfile</dockerFile>
+                                                    </build>
+                                                    <run>
+                                                        <ports>
+                                                            <port>18080:8080</port>
+                                                        </ports>
+                                                    </run>
+                                                </image>-->
                         <image>
-                            <name>fdlessard/magic-eight-ball-image:latest</name>
-                            <build>
-                                <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                            </build>
+                            <name>rabbitmq:management</name>
                             <run>
                                 <ports>
-                                    <port>18080:8080</port>
+                                    <port>1883:1883</port>
+                                    <port>5672:5672</port>
+                                    <port>15672:15672</port>
+                                </ports>
+                                <wait>
+                                    <http>
+                                        <url>http://localhost:15672</url>
+                                        <method>GET</method>
+                                        <status>200..399</status>
+                                    </http>
+                                    <time>50000</time>
+                                </wait>
+                                <log>
+                                    <prefix>rabbitmq</prefix>
+                                    <color>magenta</color>
+                                </log>
+                            </run>
+                        </image>
+                        <image>
+                            <name>postgres:9.6-alpine</name>
+                            <run>
+                                <ports>
+                                    <port>5432:5432</port>
                                 </ports>
                             </run>
                         </image>
                     </images>
                 </configuration>
+                <!-- Hooking into the lifecycle -->
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.cloudfoundry</groupId>

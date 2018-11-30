@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
@@ -57,5 +58,12 @@ class MagicEightBallControllerTest {
         assertEquals(2, mebas.size());
         assertEquals(new MagicEightBallAnswer(Long.valueOf(1), 0,"message1", "color1"), mebas.get(0));
         assertEquals(new MagicEightBallAnswer(Long.valueOf(2), 0, "message2", "color2"), mebas.get(1));
+    }
+
+    @Test
+    public void create() {
+        MagicEightBallAnswer magicEightBallAnswer = new MagicEightBallAnswer(Long.valueOf(1), 0, "message1", "color1");
+        magicEightBallController.create(magicEightBallAnswer);
+        Mockito.verify(magicEightBallService, times(1)).save(magicEightBallAnswer);
     }
 }

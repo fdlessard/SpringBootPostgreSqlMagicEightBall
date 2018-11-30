@@ -9,4 +9,8 @@ before_install:
 - docker pull postgres:9.6-alpine
 - docker pull rabbitmq:management
 
+before_script:
+# Disable services enabled by default
+- sudo /etc/init.d/postgresql stop
+
 script: mvn package

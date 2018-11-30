@@ -260,6 +260,9 @@
                                 <ports>
                                     <port>5432:5432</port>
                                 </ports>
+                                <wait>
+                                    <time>50000</time>
+                                </wait>
                                 <log>
                                     <prefix>postgres::</prefix>
                                     <color>magenta</color>

@@ -255,7 +255,7 @@
                             </run>
                         </image>
                         <image>
-                            <name>postgres:9.6-alpine</name>
+                            <name>postgres:9.6</name>
                             <run>
                                 <ports>
                                     <port>5432:5432</port>

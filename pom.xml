@@ -249,7 +249,7 @@
                                     <time>50000</time>
                                 </wait>
                                 <log>
-                                    <prefix>rabbitmq</prefix>
+                                    <prefix>rabbitmq::</prefix>
                                     <color>magenta</color>
                                 </log>
                             </run>
@@ -260,6 +260,10 @@
                                 <ports>
                                     <port>5432:5432</port>
                                 </ports>
+                                <log>
+                                    <prefix>postgres::</prefix>
+                                    <color>magenta</color>
+                                </log>
                             </run>
                         </image>
                     </images>

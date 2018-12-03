@@ -5,8 +5,8 @@ applications:
   memory : 1024M
   path: target/magiceightball-0.0.1-SNAPSHOT.jar
   instances: 1
-#  health-check-type: http
-#  health-check-http-endpoint: /actuator/health
+  health-check-type: http
+  health-check-http-endpoint: /actuator/health
   services:
     - application-logs
     - magiceightball-db

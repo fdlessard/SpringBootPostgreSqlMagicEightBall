@@ -3,6 +3,8 @@ package io.fdlessard.codebites.magiceightball.postgresql.controllers;
 import io.fdlessard.codebites.magiceightball.postgresql.domain.MagicEightBallAnswer;
 import io.fdlessard.codebites.magiceightball.postgresql.services.MagicEightBallService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +35,16 @@ public class MagicEightBallController {
         return magicEightBallService.shake();
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<MagicEightBallAnswer> get(@PathVariable("id") long id) {
+        log.debug("MagicEightBallController.get({id})", id);
+        MagicEightBallAnswer magicEightBallAnswer = magicEightBallService.getById(id);
+        if (magicEightBallAnswer == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(magicEightBallAnswer);
+    }
+
     @GetMapping(value = "/")
     @ResponseBody
     public List<MagicEightBallAnswer> getAll() {
@@ -41,6 +53,7 @@ public class MagicEightBallController {
     }
 
     @PostMapping(value = "/", produces = "application/json")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void create(@RequestBody MagicEightBallAnswer magicEightBallAnswer) {
         log.debug("MagicEightBallController.create({})", magicEightBallAnswer);
         magicEightBallService.save(magicEightBallAnswer);

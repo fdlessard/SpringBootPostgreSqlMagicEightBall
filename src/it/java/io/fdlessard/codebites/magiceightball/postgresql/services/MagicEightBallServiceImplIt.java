@@ -39,6 +39,12 @@ class MagicEightBallServiceImplIt {
     }
 
     @Test
+    void getById() {
+        MagicEightBallAnswer magicEightBallAnswers = magicEightBallService.getById(1);
+        assertNotNull(magicEightBallAnswers);
+    }
+
+    @Test
     public void save() {
 
         List<MagicEightBallAnswer> magicEightBallAnswers = magicEightBallService.getAll();

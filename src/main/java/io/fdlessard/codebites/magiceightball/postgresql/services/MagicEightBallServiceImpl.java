@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.fdlessard.codebites.magiceightball.postgresql.domain.MagicEightBallAnswer;
 import io.fdlessard.codebites.magiceightball.postgresql.repositories.MagicEightBallRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -34,6 +36,12 @@ public class MagicEightBallServiceImpl implements MagicEightBallService {
         log.debug("MagicEightBallServiceImpl.shake() - randomResponseIndex: {}", randomResponseIndex);
 
         return magicEightBallAnswers.get(randomResponseIndex);
+    }
+
+    @Cacheable(value = "magicEightBallAnswer", key = "#id")
+    public MagicEightBallAnswer getById(long id) {
+        log.debug("MagicEightBallServiceImpl.getById({id})", id);
+        return magicEightBallRepository.findById(id).orElse(null);
     }
 
     public List<MagicEightBallAnswer> getAll() {

@@ -7,6 +7,7 @@ services:
 
 before_install:
 - docker pull postgres:9.6
+- docker pull redis:latest
 - docker pull rabbitmq:management
 - sudo service postgresql stop
 # wait for postgresql to shutdown

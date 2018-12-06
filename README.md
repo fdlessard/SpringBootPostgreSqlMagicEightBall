@@ -23,3 +23,6 @@ https://thepracticaldeveloper.com/2016/10/23/produce-and-consume-json-messages-w
 
 https://dzone.com/articles/rabbitmq-and-spring-boot-integration-with-fault-to
 http://engineering.pivotal.io/post/spring-boot-injecting-credentials/
+
+
+https://www.e4developer.com/2018/02/09/tracing-messages-in-choreography-with-sleuth-and-zipkin/

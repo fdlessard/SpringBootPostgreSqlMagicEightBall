@@ -1,7 +1,7 @@
 package io.fdlessard.codebites.magiceightball.postgresql.services;
 
+import io.fdlessard.codebites.magiceightball.postgresql.SpringBootPostgreSqlMagicEightBallApplication;
 import io.fdlessard.codebites.magiceightball.postgresql.domain.MagicEightBallAnswer;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +11,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest()
+@SpringBootTest(classes = SpringBootPostgreSqlMagicEightBallApplication.class)
 @ActiveProfiles("integration")
 class MagicEightBallServiceImplIt {
 

@@ -1,29 +1,23 @@
 package io.fdlessard.codebites.magiceightball.postgresql.controllers;
 
 import io.fdlessard.codebites.magiceightball.postgresql.SpringBootPostgreSqlMagicEightBallApplication;
-import io.fdlessard.codebites.magiceightball.postgresql.domain.MagicEightBallAnswer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {SpringBootPostgreSqlMagicEightBallApplication.class})
 @ActiveProfiles("integration")
 @AutoConfigureMockMvc
@@ -69,6 +63,6 @@ class MagicEightBallControllerIt {
         mockMvc.perform(post("/magiceightball/")
                 .contentType(MediaType.APPLICATION_JSON)
         .content("{\"message\" : \"toto\", \"color\": \"blue\"}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isAccepted());
     }
 }

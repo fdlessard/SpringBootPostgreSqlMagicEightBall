@@ -1,0 +1,32 @@
+version: '2'
+services:
+  zipkin:
+    image: openzipkin/zipkin:latest
+    ports:
+      - '9411:9411'
+  postgres:
+    image: postgres:9.6
+    ports:
+      - '5432:5432'
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - '1883:1883'
+      - '5672:5672'
+      - '15672:15672'
+  magiceightball:
+    build: .
+    image: fdlessard/magiceightball-image:latest
+    depends_on:
+      - postgres
+      - redis
+      - zipkin
+      - rabbitmq
+    ports:
+      - '8080:8080'
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=development'

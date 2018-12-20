@@ -19,7 +19,6 @@ management:
     beans:
       enabled: true
 
-
 # Message Queue specific configs for app1
 # app1.exchange.name=app1-exchange
 #  app1.queue.name=app1-queue
@@ -43,7 +42,7 @@ management:
 spring:
   profiles: development
   datasource:
-    url: jdbc:postgresql://localhost:15432/postgres?currentSchema=my_schema
+    url: jdbc:postgresql://postgres:5432/postgres?currentSchema=my_schema
     username: postgres
     password:
     initialization-mode: always
@@ -56,19 +55,20 @@ spring:
       eclipselink.logging.level: FINEST
       eclipselink.weaving: false
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
   cache:
     type: redis
   redis:
-    host: localhost
+    host: redis
     port: 6379
 
-logging.level.root: DEBUG
+logging.level.root: INFO
 logging.level.org.springframework.cloud.sleuth: DEBUG
 spring.cloud.refresh.refreshable: none
+
 ---
 # Integration test profile
 

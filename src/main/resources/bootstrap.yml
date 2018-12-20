@@ -1,0 +1,14 @@
+# Bootstrap
+
+spring:
+  application:
+    name: magiceightball
+  zipkin:
+    base-url: http://zipkin:9411/
+    sender:
+      type: web
+#    service:
+#      name: magiceightball
+  sleuth:
+    sampler:
+      probability: 1

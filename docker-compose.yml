@@ -1,32 +1,41 @@
 version: '2'
 services:
   zipkin:
+    container_name: magiceightball-zipkin-container
     image: openzipkin/zipkin:latest
     ports:
-      - '9411:9411'
+    - 9411:9411
+    environment:
+      - STORAGE_TYPE=mem
+#      - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
   postgres:
+    container_name: magiceightball-postgres-container
     image: postgres:9.6
     ports:
-      - '5432:5432'
+      - 5432:5432
   redis:
+    container_name: magiceightball-redis-container
     image: redis:latest
     ports:
-      - '6379:6379'
+      - 6379:6379
   rabbitmq:
+    container_name: magiceightball-rabbitmq-container
     image: rabbitmq:management
     ports:
-      - '1883:1883'
-      - '5672:5672'
-      - '15672:15672'
+      - 1883:1883
+      - 5672:5672
+      - 15672:15672
   magiceightball:
+    container_name: magiceightball-container
     build: .
     image: fdlessard/magiceightball-image:latest
     depends_on:
       - postgres
       - redis
-      - zipkin
       - rabbitmq
+      - zipkin
     ports:
-      - '8080:8080'
+      - 5005:5005
+      - 8080:8080
     environment:
-      - 'SPRING_PROFILES_ACTIVE=development'
+      - 'SPRING_PROFILES_ACTIVE=docker-compose'

@@ -13,5 +13,5 @@ applications:
     - magiceightball-rabbitmq
     - magiceightball-redis
   env:
-    # turn on the "cloud" profile
-    SPRING_PROFILES_ACTIVE: cloud
+    # turn on the "production-cloud" profile
+    SPRING_PROFILES_ACTIVE: production-cloud

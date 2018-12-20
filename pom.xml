@@ -34,6 +34,9 @@
 
         <commons-pool2.version>2.0</commons-pool2.version>
 
+        <logback-core.version>1.2.3</logback-core.version>
+        <logstash-logback-encoder.version>5.2</logstash-logback-encoder.version>
+
         <cf-maven-plugin.version>1.0.4</cf-maven-plugin.version>
         <docker-maven-plugin.version>0.27.2</docker-maven-plugin.version>
     </properties>
@@ -169,19 +172,18 @@
             <artifactId>commons-pool2</artifactId>
             <version>${commons-pool2.version}</version>
         </dependency>
-        <!--        <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-zipkin</artifactId>
-                    <version>${spring-cloud-starter-zipkin.version}</version>
-                </dependency>-->
-        <!--        <dependency>
-                    <groupId>io.zipkin.brave</groupId>
-                    <artifactId>brave</artifactId>
-                    <version>5.6.0</version>
-                </dependency>-->
-
-
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

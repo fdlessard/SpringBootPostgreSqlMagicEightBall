@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = {SpringBootPostgreSqlMagicEightBallApplication.class})
-@ActiveProfiles("integration")
+@ActiveProfiles("integration-test")
 @AutoConfigureMockMvc
 class MagicEightBallControllerIt {
 
